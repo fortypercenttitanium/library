@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+</head>
+<body>
+    <div class="buttonbox">
+        <button class="newbook">New book</button>
+    </div>
+    <div class="modal">
+        <form class="newBookForm">
+            <div class="formline">
+                <label for="title">Book title:</label>
+                <input type="text" name="title" id="getTitle">
+            </div>
+            <div class="formline">
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="getAuthor">
+            </div>
+            <div class="formline">
+                <label for="pages">Number of pages:</label>
+                <input type="text" name="pages" id="getPages">
+            </div>
+            <div class="formline">
+                <span>Have you read this book?</span>
+            </div>
+            <div class="formline">
+                <label for="haveRead">Yes</label>
+                <input type="radio" name="haveRead" id="haveRead">
+                <label for="haveNotRead">No</label>
+                <input type="radio" name="haveRead" id="haveNotRead">
+            </div>
+            <div class="formline submit">
+                <button class='submit'>Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="container"></div>
+    <script src="script.js"></script>
+</body>
+</html>

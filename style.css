@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+}
+
+.card {
+    height: auto;
+    width: 10vw;
+    padding: 1rem;
+    border: 1px solid black;
+    border-radius: 2%;
+    background-color: bisque;
+}
+
+.newbook {
+    padding: 10px;
+    border-radius: 2%;
+}
+
+.buttonbox {
+    margin: 25px;
+}
+
+.modal {
+    display: none;
+}
+
+.formline {
+    padding: 1rem;
+}
