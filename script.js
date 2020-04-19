@@ -1,3 +1,4 @@
+//check if localstorage is available
 function storageAvailable(type) {
     var storage;
     try {
@@ -38,10 +39,17 @@ class Book {
             const nextSib = e.currentTarget.parentNode.nextSibling;
             e.currentTarget.parentNode.remove();
             this.render(nextSib)
+            this.updateStorage()
         })
     }
     info = () => {
         return `${this.title} by ${this.author}, ${this.pages} pages, ${this.haveRead ? 'read' : 'not yet read'}`
+    }
+    //called whenever a change is made to a book
+    updateStorage = () => {
+        if ((JSON.parse(localStorage.library) !== myLibrary) && storageAvailable('localStorage')) {
+            localStorage.setItem('library', JSON.stringify(myLibrary))
+        }
     }
     //locationBefore is optional
     render = (locationBefore) => {
@@ -51,13 +59,15 @@ class Book {
         deleteBook.textContent = 'Delete book';
         deleteBook.className = 'delete';
         deleteBook.addEventListener('click', e => {
+            myLibrary.splice(myLibrary.indexOf(this), 1)
+            this.updateStorage()
             container.removeChild(e.currentTarget.parentNode);
         })
         card.innerHTML =
         `<h1> ${this.title} <h1>
         <h2>by ${this.author} </h2>
         <p>${this.pages} pages long</p>
-        <p>Read: ${this.haveRead}</p>`
+        <p>Read: ${this.haveRead ? 'Yes' : 'No'}</p>`
         card.appendChild(this.button)
         card.appendChild(deleteBook)
         if (locationBefore) {
@@ -71,6 +81,7 @@ class Book {
 
 const myLibrary = [];
 
+//render if any books are stored in the local library
 if (storageAvailable('localStorage') && window.localStorage.hasOwnProperty('library')){
     console.log('storage avail and library exists')
     const tempLib = (JSON.parse(localStorage.library));
@@ -83,6 +94,7 @@ if (storageAvailable('localStorage') && window.localStorage.hasOwnProperty('libr
     console.log('no storage or lib doesnt exist');
 }
 
+//new book functions
 const modal = document.querySelector('.modal')
 
 const newBookButton = document.querySelector('.newbook');
@@ -96,7 +108,7 @@ newBookButton.addEventListener('click', () => {
 })
 
 const newBookSubmit = document.querySelector('.submit');
-
+//new book form validation
 const validateForm = () => {
     if (!/[a-z0-9]+/gi.test(document.forms['newBookForm'].title.value)) {
         alert('Please give a valid title');
@@ -116,16 +128,21 @@ const validateForm = () => {
     } else return true;
 }
 
+const validateNotExisting = () => {
+    if ((myLibrary.findIndex(item => item.title.toLowerCase() == document.forms['newBookForm'].title.value.toLowerCase())) >= 0) {
+        alert('Error: A book of that title already exists.')
+        return false;
+    } else return true;
+}
+
 newBookSubmit.addEventListener('click', (e) => {
     e.preventDefault();
-    if (validateForm()){
+    if (validateForm() && validateNotExisting()){
         let newBook = new Book(document.forms['newBookForm'].title.value, document.forms['newBookForm'].author.value, document.forms['newBookForm'].pages.value, document.querySelector('#haveRead').checked)
         newBook.render();
         myLibrary.push(newBook);
         document.forms['newBookForm'].reset();
         modal.style.display = 'none';
-        if (storageAvailable('localStorage')){
-            localStorage.setItem('library', JSON.stringify(myLibrary));
-        }
+        newBook.updateStorage();
     }
 })
