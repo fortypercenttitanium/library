@@ -22,8 +22,8 @@ function storageAvailable(type) {
             // acknowledge QuotaExceededError only if there's something already stored
             (storage && storage.length !== 0);
         }
-    }
-     
+}
+
 const container = document.querySelector('.container');
  
 class Book {
@@ -82,16 +82,22 @@ class Book {
 const myLibrary = [];
 
 //render if any books are stored in the local library
-if (storageAvailable('localStorage') && window.localStorage.hasOwnProperty('library')){
-    console.log('storage avail and library exists')
-    const tempLib = (JSON.parse(localStorage.library));
-    tempLib.forEach(item => {
-        const newBook = new Book(item['title'], item['author'], item['pages'], item['haveRead'])
-        myLibrary.push(newBook);
-    })
-    myLibrary.forEach(book => book.render())
+
+if (storageAvailable('localStorage')) {
+    if (window.localStorage.hasOwnProperty('library')) {
+        console.log('Storage available and library exists. Populating library.')
+        const tempLib = (JSON.parse(localStorage.library));
+        tempLib.forEach(item => {
+            const newBook = new Book(item['title'], item['author'], item['pages'], item['haveRead'])
+            myLibrary.push(newBook);
+        })
+        myLibrary.forEach(book => book.render())
+    } else {
+        console.log('Storage available, but no existing library. Creating empty library in storage.')
+        localStorage.setItem('library', '{}');
+    }
 } else {
-    console.log('no storage or lib doesnt exist');
+    console.log('Local storage not available.')
 }
 
 //new book functions
