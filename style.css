@@ -1,63 +1,64 @@
 * {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+		'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: azure;
+	background-color: azure;
 }
 
 .newbook {
-    background-color: rgb(97, 97, 97);
-    color: white;
-    font-weight: bold;
-    border: 1px solid grey;
+	background-color: rgb(97, 97, 97);
+	color: white;
+	font-weight: bold;
+	border: 1px solid grey;
 }
 
 h1 {
-    font-size: 1.5rem;
+	font-size: 1.5rem;
 }
 
 h2 {
-    font-size: 1rem;
-    font-style: italic;
+	font-size: 1rem;
+	font-style: italic;
 }
 
 button {
-    padding: 5px;
-    margin: 5px 0;
+	padding: 5px;
+	margin: 5px 0;
 }
 
 p {
-    font-size: 0.8rem;
+	font-size: 0.8rem;
 }
 
 .container {
-    display: flex;
+	display: flex;
 }
 
 .card {
-    height: auto;
-    width: 9vw;
-    padding: 1rem;
-    margin: 0.7rem;
-    border: 1px solid black;
-    border-radius: 2%;
-    background-color: bisque;
+	height: auto;
+	width: 9vw;
+	padding: 1rem;
+	margin: 0.7rem;
+	border: 1px solid black;
+	border-radius: 2%;
+	background-color: bisque;
 }
 
 .newbook {
-    padding: 10px;
-    border-radius: 2%;
+	padding: 10px;
+	border-radius: 2%;
 }
 
 .buttonbox {
-    margin: 25px;
+	margin: 25px;
 }
 
 .modal {
-    display: none;
+	display: none;
 }
 
 .formline {
-    padding: 1rem;
+	padding: 1rem;
 }
